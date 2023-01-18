@@ -15,11 +15,10 @@ namespace VectorsForms
         public Triangle(List<string> _params) : base(_params) { }
 
         protected override void LoadObject(List<string> _params)
-        {
-            VectorMapper mapper = new VectorMapper();
-            Mapper mapper1 = new Mapper("vectors");
-            v1 = (Vector)mapper1.GetById(Convert.ToInt32(_params[1]));
-            v2 = (Vector)mapper1.GetById(Convert.ToInt32(_params[2]));
+        {            
+            Mapper mapper = new Mapper("vectors");
+            v1 = (Vector)mapper.GetById(Convert.ToInt32(_params[1]));
+            v2 = (Vector)mapper.GetById(Convert.ToInt32(_params[2]));
         }
         public override string InsertObjectString()
         {
