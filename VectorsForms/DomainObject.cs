@@ -16,18 +16,16 @@ namespace VectorsForms
         public DomainObject(List<string> _params)
         {
             _connection=new DBConnection(@"Data Source=DESKTOP-RQ1TD73\SQLEXPRESS;Initial Catalog=VectorsBase;Integrated Security=True");
-            
-            if (Convert.ToInt32(_params[0]) > 0)
-            {
-                _id = Convert.ToInt32(_params[0]);
-                Console.WriteLine($"Подгружаем из базы объект:{this.GetType().Name}");
-                
-            }
-            else
-            {
-                Console.WriteLine($"Создаём объект:{this.GetType().Name}");
-            }
+
+            _id = Convert.ToInt32(_params[0]);
+            LoadObject(_params);
         }
+
         protected abstract void LoadObject(List<string> _params);
+
+        //для мапера
+        public abstract string InsertObjectString();
+        public abstract string SetObjectString();       
+        
     }
 }
