@@ -40,7 +40,7 @@ namespace VectorsForms
         {
             double x=Convert.ToDouble(vectorAddX.Text);
             double y= Convert.ToDouble(vectorAddY.Text);
-            Vector v = new Vector(x, y);
+            Vector v = new Vector(new List<string> { "0",Convert.ToString(x), Convert.ToString(y)});
             vectorMapper.Insert(v);
             updateGridVectors();
         }        
@@ -110,7 +110,7 @@ namespace VectorsForms
             double x = Convert.ToDouble(vectorUpdateX.Text);
             double y = Convert.ToDouble(vectorUpdateY.Text);
             int id = Convert.ToInt32(vectorUpdateById.Text);
-            Vector v = new Vector(x, y);
+            Vector v = new Vector(new List<string> { Convert.ToString(id), Convert.ToString(x), Convert.ToString(y) }); ;
             if (!vectorMapper.Update(id, v))
             {
                 MessageBox.Show("Вектор не найден, проверьте id", "UPDATE");
@@ -127,7 +127,7 @@ namespace VectorsForms
         {
             int v1_id = Convert.ToInt32(triangleAddX.Text);
             int v2_id = Convert.ToInt32(triangleAddY.Text);
-            Triangle t = new Triangle(v1_id,v2_id);
+            Triangle t = new Triangle(new List<string> { "0",Convert.ToString(v1_id), Convert.ToString(v2_id)});
             try
             {
                 triangleMapper.Insert(t);
@@ -155,7 +155,7 @@ namespace VectorsForms
             int v1_id = Convert.ToInt32(triangleUpdateX.Text);
             int v2_id = Convert.ToInt32(triangleUpdateY.Text);
             int id = Convert.ToInt32(triangleUpdateById.Text);
-            Triangle t=new Triangle(v1_id,v2_id);
+            Triangle t= new Triangle(new List<string> { "0", Convert.ToString(v1_id), Convert.ToString(v2_id) });
             if (!triangleMapper.Update(id, t))
             {
                 MessageBox.Show("Треугольник не найден, проверьте id", "UPDATE");

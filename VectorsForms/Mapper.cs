@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
-using System.Data;
 
 namespace VectorsForms
 {
-    internal class VectorMapper
+    internal class Mapper
     {
         protected static DBConnection _connection = null;
-        public VectorMapper()
+        public Mapper()
         {
             if (_connection == null)
             {
@@ -70,13 +69,13 @@ namespace VectorsForms
             string query = $"DELETE FROM vectors WHERE id={id}";
 
             _connection.openConnection();
-            SqlCommand cmd = new SqlCommand(query, _connection.getConnection());            
+            SqlCommand cmd = new SqlCommand(query, _connection.getConnection());
             int num = cmd.ExecuteNonQuery();
             _connection.closeConnection();
 
-            return num>0;
+            return num > 0;
         }
-        public bool Update(int id,Vector new_v)
+        public bool Update(int id, Vector new_v)
         {
             string query = $"UPDATE vectors SET x='{new_v._x}' , y='{new_v._y}' WHERE  id={id}";
             _connection.openConnection();
@@ -85,6 +84,5 @@ namespace VectorsForms
             _connection.closeConnection();
             return num > 0;
         }
-
     }
 }

@@ -29,7 +29,7 @@ namespace VectorsForms
             while (reader.Read())
             {
                 int id = reader.GetInt32(0);
-                Triangle v = new Triangle(id);
+                Triangle v = GetById(id);
                 ret.Add(v);
             }
             reader.Close();
@@ -50,7 +50,20 @@ namespace VectorsForms
         }
         public Triangle GetById(int id)
         {
-            return new Triangle(id);
+            string query = $"SELECT * FROM triangles WHERE id={id}";
+            SqlCommand cmd = new SqlCommand(query, _connection.getConnection());
+            List<string> par = new List<string>();
+            _connection.openConnection();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            reader.Read();
+            par.Add(reader.GetString(0));
+            par.Add(reader.GetString(1));
+            par.Add(reader.GetString(2));
+            reader.Close();
+            _connection.closeConnection();
+
+            return new Triangle(par);
         }
         public bool Delete(int id)
         {
